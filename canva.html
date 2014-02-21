@@ -1,0 +1,83 @@
+<html>
+<head>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script>
+
+	var pan;
+	var pan2;
+	var pressed = false;
+	$(document).ready(function($) {
+
+			$("#pan").mousedown(function(event) {
+				x = event.offsetX;
+				y = event.offsetY;
+				pan.beginPath();
+				pan.moveTo(x,y);
+				//pan.stroke();
+				//pan.stroke();
+				pressed = true;
+			});
+
+			$("#pan").mousemove(function(event) {
+				x = event.pageX;
+				y = event.pageY;
+				if(pressed){
+					pan.lineTo(x,y);
+				//	pan.fill();
+					pan.stroke();
+				}
+			});
+
+			$("#pan").mouseup(function(event) {
+				pressed = false;
+			});
+
+			var pan_elem = document.getElementById('pan');
+			pan = pan_elem.getContext('2d');
+			var pan2_elem = document.getElementById('pan2');
+			pan2 = pan2_elem.getContext('2d');
+
+			
+			pan2.fill();
+			
+			
+		
+	});
+
+	function drawGoogleLogo(x, y){
+				pan.beginPath();
+				pan.arc(x, y, 50, 0 * Math.PI, 2 * Math.PI, true);
+				pan.stroke();
+	           	pan.beginPath();
+	           	pan.arc(x, y, 20, 0 * Math.PI, 2 * Math.PI, true);
+	            pan.stroke(); 
+	            pan.fillStyle = "#ff0";
+	            pan.beginPath();
+	            pan.moveTo(x, y - 20);
+	            pan.lineTo(x + 46,	y - 20);
+	            pan.moveTo(x + 18, y + 8);
+	            pan.lineTo(x - 6, y + 49);
+	            pan.moveTo(x - 18, y + 8);
+	            pan.lineTo(x - 38, y - 33);
+	            pan.closePath();
+	            pan.stroke();	
+	            pan.fill();
+	            pan.moveTo(150,150);       	            
+	            pan.stroke();
+
+	}
+
+	</script>
+	<style>
+		canvas{
+			border: 1px solid black;
+			cursor:url('aero_pen.cur'),pointer;
+		}
+	</style>
+</head>
+<body style="margin:0;padding:0;">
+	<canvas height="300" width="300" id="pan"></canvas>
+	<canvas height="300" width="300" style="margin:0;padding:0;" id="pan2"></canvas>
+
+</body>
+</html>
